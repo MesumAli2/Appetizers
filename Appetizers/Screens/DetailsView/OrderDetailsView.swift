@@ -6,6 +6,7 @@ import SwiftUI
 struct OrderDetailsView: View {
     let appetizer: Appetizer
     @Binding var isShowingDetail: Bool
+    @EnvironmentObject var order: Order
 
 
     var body: some View {
@@ -38,8 +39,9 @@ struct OrderDetailsView: View {
             } 
             
             Spacer()
-                    
-            FinalPriceButton(price: appetizer.price)
+
+            FinalPriceButton(appetizer: appetizer)
+                .environmentObject(order)
 
                 }
                 .frame(width: 300, height: 525)
@@ -61,6 +63,7 @@ struct OrderDetailsView: View {
 struct OrderDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         OrderDetailsView(appetizer: MOCKDATA.sampleAppetizer, isShowingDetail: .constant(true))
+            .environmentObject(Order())
     }
 }
 
