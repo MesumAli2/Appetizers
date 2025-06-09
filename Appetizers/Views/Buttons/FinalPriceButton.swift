@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct FinalPriceButton : View {
-    
-    let price: Double
-    
+
+    let appetizer: Appetizer
+    @EnvironmentObject var order: Order
+
     var body: some View {
         Button {
-            // add to order action
-            print("tapped")
+            order.add(appetizer)
         } label: {
-            ApButton(title: "$\(price, specifier: "%.2f") - Add to Order")
+            ApButton(title: "$\(appetizer.price, specifier: "%.2f") - Add to Order")
         }
         .padding(.bottom, 30)
     }
@@ -24,5 +24,6 @@ struct FinalPriceButton : View {
 
 
 #Preview {
-    FinalPriceButton(price: 5.99)
+    FinalPriceButton(appetizer: MOCKDATA.sampleAppetizer)
+        .environmentObject(Order())
 }

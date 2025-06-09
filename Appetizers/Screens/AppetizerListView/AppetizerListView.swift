@@ -5,6 +5,7 @@ import SwiftUI
 
 struct AppetizerListView: View {
     @StateObject var viewModel = AppetizerListViewVM()
+    @EnvironmentObject var order: Order
 
     // ← add this to hold whichever row was tapped
 
@@ -30,8 +31,9 @@ struct AppetizerListView: View {
             .blur(radius:  viewModel.isShowingDetail ? 20 : 0)
 
             if  viewModel.isShowingDetail{
-            
+
                 OrderDetailsView(appetizer: viewModel.selectedAppetizer!, isShowingDetail: $viewModel.isShowingDetail)
+                    .environmentObject(order)
 
             }
 
@@ -54,5 +56,6 @@ struct AppetizerListView: View {
 struct AppetizerListView_Previews: PreviewProvider {
     static var previews: some View {
         AppetizerListView()
+            .environmentObject(Order())
     }
 }

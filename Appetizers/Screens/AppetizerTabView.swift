@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct AppetizerTabView: View {
+    @StateObject var order = Order()
+
     var body: some View {
         TabView{
             AppetizerListView()
+                .environmentObject(order)
                 .tabItem {
                     Image(systemName: "house")
                     Text("Home")
@@ -21,6 +24,7 @@ struct AppetizerTabView: View {
                     Text("Account")
                 }
             OrderView()
+                .environmentObject(order)
                 .tabItem {
                     Image(systemName: "bag")
                     Text("Order")
