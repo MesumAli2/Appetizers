@@ -1,49 +1,58 @@
-//
 //  AppetizerListView.swift
 //  Appetizers
-//
-//  Created by Mesum Syed on 27/05/2025.
-//
 
 import SwiftUI
 
 struct AppetizerListView: View {
-    
     @StateObject var viewModel = AppetizerListViewVM()
-    
-    
-    
+
+    // ← add this to hold whichever row was tapped
+
     var body: some View {
-        
-        ZStack{
-            NavigationView{
-                List(viewModel.appetizers){ appetizers in
-                    
-                    AppetizerListCell(appetizer: appetizers)
-                    
+        ZStack {
+            NavigationView {
+                List(viewModel.appetizers) { appetizer in
+                    // wrap each cell in a Button (or onTapGesture)
+                    AppetizerListCell(appetizer: appetizer)
+                        .onTapGesture {
+                            viewModel.isShowingDetail = true
+                            viewModel.selectedAppetizer = appetizer
+                        }
+                            
                 }
-                .onAppear{
-                    viewModel.getAppetizers()
-                }
-              .listStyle(.plain).navigationTitle("Appetizers")
-                
+                .navigationTitle("Appetizers")
+                .disabled( viewModel.isShowingDetail)
+                .listStyle(.plain)
             }
+            .onAppear {
+                viewModel.getAppetizers()
+            }
+            .blur(radius:  viewModel.isShowingDetail ? 20 : 0)
+
+            if  viewModel.isShowingDetail{
             
-            if viewModel.isLoading{
+                OrderDetailsView(appetizer: viewModel.selectedAppetizer!, isShowingDetail: $viewModel.isShowingDetail)
+
+            }
+
+            if viewModel.isLoading {
                 LoadingView()
             }
-            
-        }.alert(item: $viewModel.alertITem){
-            alertItem in
-            Alert(title: alertItem.title, message: alertItem.message, dismissButton: alertItem.disimissButton)
         }
-     
+        .alert(item: $viewModel.alertITem) { alertItem in
+            Alert(
+                title: alertItem.title,
+                message: alertItem.message,
+                dismissButton: alertItem.disimissButton
+            )
+        }
+        // ← present OrderDetailsView whenever `selectedAppetizer` is non‐nil
+       
     }
-    
-   
 }
 
-#Preview {
-    AppetizerListView()
+struct AppetizerListView_Previews: PreviewProvider {
+    static var previews: some View {
+        AppetizerListView()
+    }
 }
-

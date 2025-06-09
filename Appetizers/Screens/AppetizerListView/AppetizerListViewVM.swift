@@ -12,6 +12,9 @@ class AppetizerListViewVM: ObservableObject{
     @Published var appetizers: [Appetizer] = []
     @Published var alertITem: AlertItem?
     @Published var isLoading = false
+    @Published var selectedAppetizer: Appetizer? = nil
+    @Published var isShowingDetail = false
+
 
     
     func getAppetizers(){
@@ -20,6 +23,7 @@ class AppetizerListViewVM: ObservableObject{
             
             DispatchQueue.main.async {
                 self.isLoading = false
+
                 switch result {
                 case .success(let success):
                     self.appetizers = success
@@ -42,4 +46,9 @@ class AppetizerListViewVM: ObservableObject{
            
         }
     }
+    
+    func  setAppetizer(appetizer: Appetizer){
+        self.selectedAppetizer = appetizer
+    }
+    
 }
