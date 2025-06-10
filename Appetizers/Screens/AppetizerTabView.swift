@@ -15,7 +15,7 @@ struct AppetizerTabView: View {
             AppetizerListView()
                 .environmentObject(order)
                 .tabItem {
-                    Image(systemName: "house")
+                    Image(systemName: "home")
                     Text("Home")
                 }
             AccountView()
