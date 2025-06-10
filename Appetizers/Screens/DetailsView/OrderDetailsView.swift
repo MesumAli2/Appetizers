@@ -40,7 +40,7 @@ struct OrderDetailsView: View {
             
             Spacer()
 
-            FinalPriceButton(appetizer: appetizer)
+            FinalPriceButton(appetizer: appetizer, isShowingDetail:  $isShowingDetail)
                 .environmentObject(order)
 
                 }

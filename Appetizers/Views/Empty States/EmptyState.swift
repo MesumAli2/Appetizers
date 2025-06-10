@@ -9,23 +9,26 @@ import SwiftUI
 
 struct EmptyState: View {
     let imageName: String
+    let message: String
     var body: some View {
         ZStack{
             Color(.systemBackground)
-                .edgesIgnoringSafeArea(.all)
+                .ignoresSafeArea(.all)
             
             VStack{
-                Image("empty-order")
+                Image(imageName)
                     .resizable()
                     .scaledToFit()
-                    .frame(height: 100)
+                    .frame(height: 150)
+                    .padding()
                 
-                Text("Default Message")
+                Text(message)
                     .font(.title3)
                     .fontWeight(.semibold)
                     .multilineTextAlignment(.center)
                     .foregroundColor(.secondary)
                     .padding()
+
                     
             }
         }
@@ -33,5 +36,5 @@ struct EmptyState: View {
 }
 
 #Preview {
-    EmptyState(imageName: "empty-order")
+    EmptyState(imageName: "empty-order", message: "This is a test message i am making it a little longer to see how it wraps.")
 }

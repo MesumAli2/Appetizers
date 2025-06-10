@@ -15,7 +15,7 @@ struct ApButton: View {
             .fontWeight(.semibold)
             .frame(width: 260, height: 50)
             .foregroundColor(.white)
-            .background(Color.brandPrimary)
+            .background(Color.accentColor)
             .cornerRadius(10)
     }
 }

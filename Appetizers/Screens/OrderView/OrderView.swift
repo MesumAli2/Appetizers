@@ -16,26 +16,36 @@ struct OrderView: View {
 
     var body: some View {
         NavigationView {
-            VStack {
-                List {
-                    ForEach(order.items) { appetizer in
-                        AppetizerListCell(appetizer: appetizer)
+            ZStack{
+        
+                VStack {
+                        List {
+                            ForEach(order.items) { appetizer in
+                                AppetizerListCell(appetizer: appetizer)
+                            }
+                            .onDelete(perform: deleteItems) // Allows swiping to delete items
+                        }
+                  
+                    Spacer()
+                    Button {
+                        // 3. Action to start Live Activity
+                        startDeliveryLiveActivity()
+                    } label: {
+                        // Displays total price with two-decimal formatting and "Place Order"
+                        ApButton(title: "\(order.totalPrice, specifier: "%.2f") - Place Order")
                     }
-                    .onDelete(perform: deleteItems) // Allows swiping to delete items
+                    .padding(.bottom, 20) // Add some padding at the bottom for the button
+            
                 }
-                .listStyle(PlainListStyle()) // Clean list style
+          
+                if order.items.isEmpty {
+                
+                    EmptyState(imageName: "empty-order", message: "You Have no item in your order. \n Please add an appetizer!")
 
-                Spacer() // Pushes content to the top
-
-                Button {
-                    // 3. Action to start Live Activity
-                    startDeliveryLiveActivity()
-                } label: {
-                    // Displays total price with two-decimal formatting and "Place Order"
-                    ApButton(title: "\(order.totalPrice, specifier: "%.2f") - Place Order")
                 }
-                .padding(.bottom, 20) // Add some padding at the bottom for the button
+              
             }
+          
             .navigationTitle("Order :)") // Navigation bar title
         }
     }

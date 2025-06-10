@@ -9,7 +9,6 @@ import SwiftUI
 import UIKit
 
 enum AppColors {
-    static let brandPrimarySwiftUI = Color("brandPrimary")
     static var brandPrimaryUIKit: UIColor {
         UIColor(named: "brandPrimary") ?? .black
     }
