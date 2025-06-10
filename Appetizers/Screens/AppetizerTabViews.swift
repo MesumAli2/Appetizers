@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AppetizerTabView: View {
+struct AppetizerTabViews: View {
     @StateObject var order = Order()
 
     var body: some View {
@@ -34,5 +34,5 @@ struct AppetizerTabView: View {
 }
 
 #Preview {
-    AppetizerTabView()
+    AppetizerTabViews()
 }
