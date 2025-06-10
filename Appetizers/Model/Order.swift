@@ -1,3 +1,11 @@
+//
+//  Order.swift
+//  Appetizers
+//
+//  Created by Mesum Syed on 09/06/2025.
+//
+
+import Foundation
 import SwiftUI
 
 final class Order: ObservableObject {
